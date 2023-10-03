@@ -29,5 +29,5 @@ jobs:
         uses: actions/deploy-pages@v2
         with:
           artifact_name: application
-          token: ${{secrets.GIT_TOKEN}}
+          token: ${{secrets.kahoot_token}}
 
