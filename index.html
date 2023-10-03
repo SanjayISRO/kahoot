@@ -1,24 +1,113 @@
 <html>
-    <head>
-        <title>kahoot!</title>
-        <base href="/">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
-    </head>
-    <body>
-        <header>Genesys Kahoot!</header>
-        <section>
-            <h3>Choose the correct answer</h3>
-            <div>
-                <label for="">1. What is the full name represented by the acronym GPT in the context of ChatGPT?</label>
-                <input type="radio" name="GPT">a)Generalized Proportional Tax 
 
-                <input type="radio" name="GPT">b)Gaussian Process Transformation
-     
-                <input type="radio" name="GPT">c)Generative Pre-trained Transformer 
-     
-                <input type="radio" name="GPT">d)Gaming Performance Test   
-            </div>
-        </section>
-    </body>
+<head>
+    <title>kahoot!</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style> 
+    label {
+        font-weight: bolder;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>Genesys Kahoot!</h2>
+    </header>
+    <section id="userInfo" style="margin-top: 15px;">
+        <label for="userName">User Name :</label>
+        <input type="text" name="" id="name" placeholder="username"><br /><br />
+        <label  for="mobile">Mobile :</label>
+        <input type="text" name="" id="mobile" placeholder="mobile"><br /><br />
+        <button onClick="goToNext()">Submit</button>
+    </section>
+    <section id="kahoot" style="margin-top: 15px;">
+        <span id="mins"></span>:<span id="secs"></span>
+        <h3>Choose the correct answer</h3>
+        <div>
+            <label for="">1. What is the full name represented by the acronym GPT in the context of
+                ChatGPT?</label><br />
+            <input onChange="checkAnswer(1, 'correct')" type="radio" name="GPT">a)Generalized Proportional Tax<br />
+
+            <input onChange="checkAnswer(1, 'wrong')" type="radio" name="GPT">b)Gaussian Process Transformation<br />
+
+            <input onChange="checkAnswer(1, 'wrong')" type="radio" name="GPT">c)Generative Pre-trained Transformer<br />
+
+            <input onChange="checkAnswer(1, 'wrong')" type="radio" name="GPT">d)Gaming Performance Test<br />
+        </div>
+
+        <div style="margin-top: 15px;">
+            <label for="">2. Which company's tagline was "Do no evil" before it was updated to "Do the right
+                thing"?</label><br />
+
+            <input onChange="checkAnswer(2, 'wrong')" type="radio" name="two">a) Apple<br />
+
+            <input onChange="checkAnswer(2, 'wrong')" type="radio" name="two">b) Microsoft <br />
+
+            <input onChange="checkAnswer(2, 'wrong')" type="radio" name="two">c) Amazon <br />
+
+            <input onChange="checkAnswer(2, 'correct')" type="radio" name="two">d) Google<br />
+        </div>
+
+        <button style="margin-top: 15px;" onClick="submit()">Submit</button>
+    </section>
+    <section id="thankyou" style="margin-top: 15px;">
+        <h3>Thakyou</h3>
+    </section>
+</body>
+
+<script>
+    var interval;
+    var seconds = 00, minutes = 00;
+    var name;
+    var mobile
+
+    (function () {
+        document.getElementById('kahoot').style.display = 'none';
+        document.getElementById('thankyou').style.display = 'none';
+        document.getElementById('mins').innerText = minutes.toString().length === 1 ? `0${minutes}` : minutes;
+        document.getElementById('secs').innerText = seconds.toString().length === 1 ? `0${seconds}` : seconds;
+    })()
+    var correctAns = {};
+    function checkAnswer(qNo, ans) {
+        correctAns[qNo] = ans;
+    }
+
+    function submit() {
+        clearInterval(interval)
+        let count = 0;
+        for (let ans in correctAns) {
+            if (correctAns[ans] === 'correct') {
+                count++;
+            }
+        }
+        let totalCorrectans = count;
+        let totalTime = `${document.getElementById('mins').innerHTML} : ${document.getElementById('secs').innerHTML}`
+
+        alert(`Hi ${name} :: ${mobile}.\nYour total is ${count} and the time taken is ${totalTime}\nPlease take a screenshot before pressing Ok and send it to the admin number`);
+        document.getElementById('kahoot').style.display = 'none';
+        document.getElementById('thankyou').style.display = 'block';
+
+
+    }
+
+    function goToNext() {
+        name = document.getElementById('name').value
+        mobile = document.getElementById('mobile').value
+        document.getElementById('kahoot').style.display = 'block';
+        document.getElementById('userInfo').style.display = 'none';
+        interval = setInterval(() => {
+            seconds++
+            if (seconds === 60) {
+                seconds = 0;
+                minutes++;
+                document.getElementById('mins').innerText = minutes.toString().length === 1 ? `0${minutes}` : minutes;;
+            }
+            document.getElementById('secs').innerText = seconds.toString().length === 1 ? `0${seconds}` : seconds;;
+        }, 1000);
+    }
+</script>
+
 </html>
