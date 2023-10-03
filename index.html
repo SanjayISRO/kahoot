@@ -85,8 +85,8 @@
         }
         let totalCorrectans = count;
         let totalTime = `${document.getElementById('mins').innerHTML} : ${document.getElementById('secs').innerHTML}`
-
-        alert(`Hi ${name} :: ${mobile}.\nYour total is ${count} and the time taken is ${totalTime}\nPlease take a screenshot before pressing Ok and send it to the admin number`);
+        var text = 'please take a screenshot before pressing Ok and send it to the admin number'
+        alert(`Hi ${name} :: ${mobile}.\n\nYour total is ${count} and the time taken is ${totalTime}\n\n${text}`);
         document.getElementById('kahoot').style.display = 'none';
         document.getElementById('thankyou').style.display = 'block';
 
